@@ -54,6 +54,7 @@ public enum AttendanceType {
                 } else if (min <= 30) {
                     return LATE;
                 }
+                return ABSENCE;
             }
         }
 
@@ -65,6 +66,7 @@ public enum AttendanceType {
             } else if (min <= 30) {
                 return LATE;
             }
+            return ABSENCE;
         }
         return ATTENDANCE;
 
@@ -74,7 +76,7 @@ public enum AttendanceType {
         int hour = localDateTime.getHour();
 
         if(hour<RUN_START || hour >= RUN_END){
-            throw new IllegalArgumentException("캠퍼스 운영 시간에만 출석이 가능합니다.");
+            throw new IllegalArgumentException("잘못된 형식을 입력하였습니다.");
 
         }
     }
