@@ -37,9 +37,19 @@ public class AttendancesReader {
                 LocalDateTime localDateTime = LocalDateTime.parse(
                         splitLine[1], DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")).withSecond(0);
 
-                Student student = new Student(name);
-                student.addAttendance(new Attendance(localDateTime));
 
+
+
+                Student student = new Student(name);
+                if(students.contains(student)){
+                    for(Student sameStudent : students){
+                        if(sameStudent.equals(student)){
+                            sameStudent.addAttendance(new Attendance(localDateTime));
+                        }
+                    }
+                    continue;
+                }
+                student.addAttendance(new Attendance(localDateTime));
                 students.add(student);
             }
         } catch (IOException e) {
