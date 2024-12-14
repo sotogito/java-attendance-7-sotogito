@@ -17,6 +17,9 @@ public enum AttendanceType {
     private static final int START = 10;
     private static final int END = 18;
 
+    private static final int RUN_START = 8;
+    private static final int RUN_END = 23;
+
     AttendanceType(String name) {
 
         this.name = name;
@@ -65,6 +68,15 @@ public enum AttendanceType {
         }
         return ATTENDANCE;
 
+    }
+
+    public static void validateSchoolStartTime(LocalDateTime localDateTime){
+        int hour = localDateTime.getHour();
+
+        if(hour<RUN_START || hour >= RUN_END){
+            throw new IllegalArgumentException("캠퍼스 운영 시간에만 출석이 가능합니다.");
+
+        }
     }
 
 }

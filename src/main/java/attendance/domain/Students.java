@@ -12,6 +12,9 @@ public class Students {
     }
 
 
+    public List<Student> getStudents(){
+        return students;
+    }
     public Student findStudentByName(String name){
         for(Student student :  students){
             if(student.isSameName(name)){
