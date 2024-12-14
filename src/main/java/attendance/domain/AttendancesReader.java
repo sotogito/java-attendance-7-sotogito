@@ -1,5 +1,7 @@
 package attendance.domain;
 
+import attendance.domain.student.Attendance;
+import attendance.domain.student.Student;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -22,7 +24,6 @@ public class AttendancesReader {
         String path = "src/main/resources/attendances.csv";
         List<Student> students = new ArrayList<>(); //데이터 저장 리스트
 
-
         try {
             BufferedReader br = new BufferedReader(new FileReader(path));
 
@@ -36,10 +37,15 @@ public class AttendancesReader {
                 LocalDateTime localDateTime = LocalDateTime.parse(
                         splitLine[1], DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")).withSecond(0);
 
+                Student student = new Student(name);
+                student.addAttendance(new Attendance(localDateTime));
+
+                students.add(student);
             }
         } catch (IOException e) {
             throw new IllegalArgumentException("파일 읽기 오류");
         }
+        System.out.println(students.size());
         return students;
     }
 
