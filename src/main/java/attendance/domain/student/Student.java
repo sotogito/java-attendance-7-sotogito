@@ -113,6 +113,6 @@ public class Student implements Comparable<Student>{
 
     @Override
     public int compareTo(Student o) {
-        return Integer.compare(this.absenceCount, o.absenceCount);
+        return - Integer.compare(this.absenceCount, o.absenceCount);
     }
 }
