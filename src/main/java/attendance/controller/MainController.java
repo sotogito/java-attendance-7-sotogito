@@ -42,7 +42,6 @@ public class MainController {
 
             Function function = inputFunction();
 
-
             if(function.equals(Function.QUIT)){
                 break;
             }
@@ -59,17 +58,21 @@ public class MainController {
                         break;
                     }catch (IllegalArgumentException e){
                         Output.printError(e.getMessage());
-                        break;
                     }
                 }
             } else if (function.equals(Function.EDIT_ATTENDANCE)) {
-                Student student = editAttendanceService.findStudent(Input.inputToEditStudentName());
-                int day  = Input.inputChangeDay();
-                TimeDto timeDto = TimeParser.parse(Input.inputTime());
+                while (true){
+                    try{
+                        Student student = editAttendanceService.findStudent(Input.inputToEditStudentName());
+                        int day  = Input.inputChangeDay();
+                        TimeDto timeDto = TimeParser.parse(Input.inputTime());
 
-
-                String printout = editAttendanceService.informationPrintout(student,day,nowDate,timeDto);
-                System.out.println(printout);
+                        String printout = editAttendanceService.informationPrintout(student,day,nowDate,timeDto);
+                        System.out.println(printout);
+                    }catch (IllegalArgumentException e){
+                        Output.printError(e.getMessage());
+                    }
+                }
 
             } else if (function.equals(Function.PRINT_ATTENDANCE)) {
                 Student student = printService.findAttendanceHistory(Input.inputStudentName());
@@ -87,7 +90,6 @@ public class MainController {
             }
         }
     }
-
 
 
 

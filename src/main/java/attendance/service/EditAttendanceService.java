@@ -13,28 +13,12 @@ public class EditAttendanceService {
     public EditAttendanceService(Students students) {
         this.students = students;
     }
-
-
-    public Attendance findAttendance(String name,int changeDay){
-        Student student = students.findStudentByName(name);
-        Attendance attendance = student.findAttendanceByDay(changeDay);
-        return attendance;
-    }
-
-    public Attendance getOldAttendance(Attendance attendance){
-        return attendance.cloneOldAttendance();
-    }
-
-    public Attendance changeAttendanceDate(Attendance attendance,LocalDateTime today , TimeDto newTime){
-        attendance.changeTime(newTime.hour(),newTime.min());
-        return attendance;
-    }
+    
 
     //note 아니면 이거 한번에
     public String informationPrintout(Student student,int changeDay,LocalDateTime today , TimeDto newTime){
         String printout = "%s -> %s 수정 완료!";
 
-        //Student student = students.findStudentByName(name);
         Attendance attendance = student.findAttendanceByDay(changeDay);
 
         Attendance oldAttendance = attendance.cloneOldAttendance();
@@ -44,8 +28,6 @@ public class EditAttendanceService {
         Attendance newAttendance = new Attendance(newDateTime);
 
         student.addAttendance(newAttendance);
-
-
 
         return String.format(printout,oldAttendance,newAttendance.getTimeAndAttendanceTypePrintout());
     }

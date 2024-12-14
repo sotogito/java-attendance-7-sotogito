@@ -55,7 +55,9 @@ public class Attendance implements Comparable<Attendance>{
     }
 
     public LocalDateTime getNewDateTime(int newHour,int newMin){
-        LocalDateTime newDatetime = dateTime.withHour(newHour).withMinute(newMin);
+        //LocalDateTime newDatetime = dateTime.withHour(newHour).withMinute(newMin);
+        LocalDateTime newDatetime = LocalDateTime.of(dateTime.getYear(),dateTime.getMonth(),dateTime.getDayOfMonth(),
+                newHour,newMin);
         return newDatetime;
     }
 
