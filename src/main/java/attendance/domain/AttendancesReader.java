@@ -20,8 +20,8 @@ public class AttendancesReader {
      * 가져온 LocalDataTime으로 요일을 가져오고 월요일인 경우 Attendance에 출석 유횽을 업뎅이트한다.
      */
 
-    public List<Student> read(){
-        String path = "src/main/resources/attendances.csv";
+    public List<Student> read(String path){
+        //String path = "src/main/resources/attendances.csv";
         List<Student> students = new ArrayList<>(); //데이터 저장 리스트
 
         try {

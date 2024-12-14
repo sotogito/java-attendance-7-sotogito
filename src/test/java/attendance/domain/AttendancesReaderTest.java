@@ -9,7 +9,7 @@ class AttendancesReaderTest {
     @Test
     void 출력확인(){
         AttendancesReader reader = new AttendancesReader();
-        reader.read();
+        reader.read("src/main/resources/attendances.csv");
     }
 
 }
