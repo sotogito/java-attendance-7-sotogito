@@ -40,7 +40,6 @@ public class MainController {
             if(function.equals(Function.QUIT)){
                 break;
             }
-
             if(function.equals(Function.ATTENDANCE_CHECK)){
                 while (true){
                     try{
