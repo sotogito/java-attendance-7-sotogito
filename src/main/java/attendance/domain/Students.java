@@ -1,6 +1,8 @@
 package attendance.domain;
 
+import attendance.constants.RiskType;
 import attendance.domain.student.Student;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Students {
@@ -12,9 +14,18 @@ public class Students {
     }
 
 
-    public List<Student> getStudents(){
-        return students;
+    public List<Student> getRiskStudents(){
+        List<Student> result = new ArrayList<>();
+
+        for(Student student : students){
+            if(!student.getRiskType().equals(RiskType.NOTHING) &&
+            !student.getRiskType().equals(RiskType.END)){
+                result.add(student);
+            }
+        }
+        return result;
     }
+
     public Student findStudentByName(String name){
         for(Student student :  students){
             if(student.isSameName(name)){
