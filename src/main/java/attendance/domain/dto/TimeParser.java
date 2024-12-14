@@ -14,6 +14,12 @@ public class TimeParser {
             int hour = Integer.parseInt(split[0].trim());
             int min = Integer.parseInt(split[1].trim());
 
+            if(hour <0 || hour > 12){
+                throw new IllegalArgumentException("잘못된 형식을 입력하였습니다.");
+            } else if (min < 0 || min > 60) {
+                throw new IllegalArgumentException("잘못된 형식을 입력하였습니다.");
+            }
+
             return new TimeDto(hour,min);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("잘못된 형식을 입력하였습니다.");
