@@ -58,6 +58,7 @@ public class MainController {
                         break;
                     }catch (IllegalArgumentException e){
                         Output.printError(e.getMessage());
+                        break;
                     }
                 }
             } else if (function.equals(Function.EDIT_ATTENDANCE)) {
@@ -71,6 +72,7 @@ public class MainController {
                         System.out.println(printout);
                     }catch (IllegalArgumentException e){
                         Output.printError(e.getMessage());
+                        break;
                     }
                 }
 
