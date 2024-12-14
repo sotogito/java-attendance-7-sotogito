@@ -1,6 +1,7 @@
 package attendance.controller;
 
 import attendance.constants.Function;
+import attendance.constants.Week;
 import attendance.domain.AttendancesReader;
 import attendance.domain.Students;
 import attendance.domain.dto.TimeDto;
@@ -34,6 +35,11 @@ public class MainController {
     public void run(){
         while (true){
             LocalDateTime nowDate = DateTimes.now();
+            System.out.printf("오늘은 %d월 %d일 %s입니다. 기능을 선택해 주세요.\n",
+                    nowDate.getMonthValue(),
+                    nowDate.getDayOfMonth(),
+                    Week.find(nowDate).getKorean());
+
             Function function = inputFunction();
 
 
