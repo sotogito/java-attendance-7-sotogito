@@ -29,6 +29,11 @@ public enum Function {
                 return function;
             }
         }
-        throw new IllegalArgumentException("존재하지 않는 기능입니다.");
+        throw new IllegalArgumentException("잘못된 형식을 입력하였습니다.");
+    }
+
+    @Override
+    public String toString(){
+        return String.format("%s. %s\n",value,name);
     }
 }
