@@ -70,6 +70,7 @@ public class MainController {
 
                         String printout = editAttendanceService.informationPrintout(student,day,nowDate,timeDto);
                         System.out.println(printout);
+                        break;
                     }catch (IllegalArgumentException e){
                         Output.printError(e.getMessage());
                         break;
