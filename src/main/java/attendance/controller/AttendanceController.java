@@ -1,6 +1,7 @@
 package attendance.controller;
 
-import attendance.domain.Crews;
+import attendance.domain.Attendance;
+import attendance.domain.Crew;
 import attendance.domain.Function;
 import attendance.service.AttendanceService;
 import attendance.util.CrewsFactory;
@@ -8,28 +9,44 @@ import attendance.util.FilePath;
 import attendance.util.ResourceReader;
 import attendance.view.ExceptionHandler;
 import attendance.view.InputView;
+import camp.nextstep.edu.missionutils.DateTimes;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 public class AttendanceController {
     private final AttendanceService attendanceService = new AttendanceService();
 
     public void main() {
-//        LocalDateTime today = DateTimes.now();
-        LocalDateTime today = LocalDateTime.of(2024, 12, 26, 13, 0);
+        while (true) {
+//            LocalDateTime today = LocalDateTime.of(2024, 12, 26, 13, 0);
+            LocalDateTime today = DateTimes.now();
 
-        try {
-            Crews crews = createCrews(today);
+            try {
+                createCrews(today);
 
-            Function function = readFunction(today);
-            if (Function.종료 == function) {
-                return;
+                Function function = readFunction(today);
+                if (Function.종료 == function) {
+                    return;
+                }
+
+                if (Function.출석_확인 == function) {
+                    checkAttendance(today);
+                }
+
+
+            } catch (IllegalArgumentException e) {
+                ExceptionHandler.read(e);
             }
-
-
-        } catch (IllegalArgumentException e) {
-            ExceptionHandler.read(e);
         }
+    }
+
+    private void checkAttendance(LocalDateTime today) {
+        String nickname = InputView.readNickName();
+        LocalTime time = InputView.readTime();
+
+        Attendance attendance = attendanceService.checkAttendance(today, nickname, time);
+        System.out.println(attendance);
     }
 
     private Function readFunction(LocalDateTime today) {
@@ -38,10 +55,10 @@ public class AttendanceController {
         return Function.find(input);
     }
 
-    private Crews createCrews(LocalDateTime today) {
+    private void createCrews(LocalDateTime today) {
         List<String> attendanceData = ResourceReader.readFile(FilePath.ATTENDANCES_PATH);
 
-        return CrewsFactory.create(attendanceData, today);
+        CrewsFactory.create(attendanceData, today);
     }
 
 }

@@ -12,7 +12,7 @@ import java.util.List;
 public class CrewsFactory {
 
     /// 파일에 있는 날짜들만 출석 등록함
-    public static Crews create(List<String> attendances, LocalDateTime today) {
+    public static void create(List<String> attendances, LocalDateTime today) {
         List<Crew> crews = new ArrayList<>();
 
         for (String attendance : attendances) {
@@ -51,7 +51,7 @@ public class CrewsFactory {
 //            crew.addAbsenceUntilToday(LocalDate.of(2024, 12, 1),
 //                    LocalDateTime.of(2024, 12, 26, 12, 12));
         }
-        return new Crews(crews);
+        Crews.CREWS.addCrews(crews);
     }
 
 }

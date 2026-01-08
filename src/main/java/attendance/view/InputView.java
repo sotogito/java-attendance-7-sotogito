@@ -3,6 +3,9 @@ package attendance.view;
 import attendance.domain.DayOfWeekKorean;
 import attendance.domain.Function;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class InputView {
 
@@ -16,6 +19,25 @@ public class InputView {
             System.out.println(function);
         }
         return Reader.read().getInput();
+    }
+
+    public static String readNickName() {
+        System.out.println("닉네임을 입력해 주세요.");
+
+        return Reader.read().getInput();
+    }
+
+    public static LocalTime readTime() {
+        System.out.println("등교 시간을 입력해 주세요.");
+
+        try {
+            return LocalTime.parse(
+                    Reader.read().getInput(),
+                    DateTimeFormatter.ofPattern("HH:mm")
+            );
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException("잘못된 형식을 입력하였습니다.");
+        }
     }
 
 }

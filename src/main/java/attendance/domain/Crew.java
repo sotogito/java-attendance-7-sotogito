@@ -18,6 +18,10 @@ public class Crew {
         this.nickname = nickname;
     }
 
+    public boolean isSameNickname(String nickname) {
+        return nickname.equals(this.nickname);
+    }
+
     public void addAttendance(Attendance attendance) {
         attendances.add(attendance);
     }
