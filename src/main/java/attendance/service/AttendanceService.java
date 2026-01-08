@@ -4,6 +4,7 @@ import attendance.domain.Attendance;
 import attendance.domain.Crew;
 import attendance.domain.Crews;
 import attendance.domain.DayOfWeekKorean;
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -30,15 +31,14 @@ public class AttendanceService {
     }
 
     public Attendance checkAttendance(LocalDateTime today, Crew crew, LocalTime time) {
+        LocalDateTime attendanceDateTime;
         try {
-            today = today
-                    .withHour(time.getHour())
-                    .withMinute(time.getMinute());
-        } catch (Exception e) {
+            attendanceDateTime = today.with(time);
+        } catch (DateTimeException e) {
             throw new IllegalArgumentException("잘못된 형식을 입력하였습니다.");
         }
 
-        Attendance attendance = new Attendance(today);
+        Attendance attendance = new Attendance(attendanceDateTime);
         crew.addAttendance(attendance);
 
         return attendance;
