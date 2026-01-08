@@ -32,7 +32,7 @@ public class Attendance implements Comparable<Attendance> {
         String date = dateTime.format(DateTimeFormatter.ofPattern("MM월 dd일"));
         String dayOfWeek = dayOfWeekKorean.getKorean();
         String time = dateTime.format(DateTimeFormatter.ofPattern("HH:mm"));
-        String attendanceState = attendanceType.getKorean();
+        String attendanceState = String.format("(%s)", attendanceType.getKorean());
 
         sj.add(date)
                 .add(dayOfWeek)
