@@ -23,7 +23,7 @@ public class OutputView {
 
         System.out.print(oldAttendance);
         System.out.print(" -> ");
-        System.out.printf("%s (%s)\n", formatted, attendanceType.getKorean());
+        System.out.printf("%s (%s) 수정 완료!\n", formatted, attendanceType.getKorean());
     }
 
     public static void writeRiskOfExpulsion(List<Crew> crews) {
@@ -37,10 +37,21 @@ public class OutputView {
                     absence,
                     late,
                     expulsionState.getValue()
-                    );
+            );
         }
+    }
 
+    public static void writeAttendanceHistory(Crew crew) {
+        System.out.println();
+        System.out.printf("이번 달 %s의 출석 기록입니다.\n\n", crew.getNickname());
 
+        System.out.println(crew);
+        System.out.println("\n");
+        System.out.printf("출석: %d회\n", crew.getAttendanceCountByType(AttendanceType.출석));
+        System.out.printf("지각: %d회\n", crew.getAttendanceCountByType(AttendanceType.지각));
+        System.out.printf("결석: %d회\n", crew.getTotalAbsence());
+        System.out.println();
+        System.out.printf("%s 대상자입니다.\n", crew.getExpulsionState().getValue());
     }
 
 }

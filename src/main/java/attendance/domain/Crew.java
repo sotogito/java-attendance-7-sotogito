@@ -123,8 +123,8 @@ public class Crew {
         Collections.sort(attendances);
 
         StringJoiner sj = new StringJoiner("\n");
-        sj.add(nickname);
         attendances.forEach(attendance -> sj.add(attendance.toString()));
+
         return sj.toString();
     }
 

@@ -38,6 +38,9 @@ public class AttendanceController {
                 if (Function.출석_수정 == function) {
                     editAttendance(today);
                 }
+                if(Function.크루별_출석_기록_확인 == function) {
+                    checkAttendanceHistory();
+                }
                 if(Function.제적_위험자_확인 ==function) {
                     checkRiskOfExpulsion();
                 }
@@ -46,6 +49,12 @@ public class AttendanceController {
                 ExceptionHandler.read(e);
             }
         }
+    }
+
+    private void checkAttendanceHistory() {
+        Crew crew = attendanceService.findCrew(InputView.readNickName());
+
+        OutputView.writeAttendanceHistory(crew);
     }
 
     private void checkRiskOfExpulsion() {
