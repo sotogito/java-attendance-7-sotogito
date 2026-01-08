@@ -1,0 +1,49 @@
+package attendance.util;
+
+import attendance.domain.Attendance;
+import attendance.domain.Crew;
+import attendance.domain.Crews;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+
+public class CrewsFactory {
+
+    public static Crews create(List<String> attendances) {
+        List<Crew> crews = new ArrayList<>();
+
+        for (String attendance : attendances) {
+            String[] split = attendance.split(",");
+
+            if (split.length != 2) {
+                throw new IllegalArgumentException("예기치 못한 오류가 발생했습니다.");
+            }
+
+            String nickname = split[0];
+            LocalDateTime dateTime;
+            try {
+                dateTime = LocalDateTime.parse(
+                        split[1],
+                        DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
+                );
+            } catch (Exception e) {
+                throw new IllegalArgumentException("예기치 못한 오류가 발생했습니다.");
+            }
+
+            Crew newCrew = new Crew(nickname);
+            if (crews.contains(newCrew)) {
+                for (Crew crew : crews) {
+                    if (crew.equals(newCrew)) {
+                        crew.addAttendance(new Attendance(dateTime));
+                    }
+                }
+                continue;
+            }
+            crews.add(newCrew);
+            newCrew.addAttendance(new Attendance(dateTime));
+        }
+        return new Crews(crews);
+    }
+
+}

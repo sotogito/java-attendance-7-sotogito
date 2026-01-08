@@ -4,7 +4,20 @@ import java.time.DayOfWeek;
 import java.time.LocalTime;
 
 public enum AttendanceType {
-    출석, 지각, 결석;
+    출석("출석"),
+    지각("지각"),
+    결석("결석")
+    ;
+
+    private final String korean;
+
+    AttendanceType(String korean) {
+        this.korean = korean;
+    }
+
+    public String getKorean() {
+        return korean;
+    }
 
     /**
      * - 월 : 13:00~18:00
