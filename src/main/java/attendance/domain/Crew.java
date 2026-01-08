@@ -32,15 +32,10 @@ public class Crew {
         return ExpulsionState.findByAbsenceCount(totalAbsence);
     }
 
-    public int getTotalAbsence() {
-        int late = getAttendanceCountByType(AttendanceType.지각);
-        int absence = getAttendanceCountByType(AttendanceType.결석);
-        int addAbsenceFromLate = late / 3;
-
-        return absence + addAbsenceFromLate;
-    }
-
     public int getAttendanceCountByType(AttendanceType type) {
+        if (type == AttendanceType.결석) {
+            return getTotalAbsence();
+        }
         int total = 0;
 
         for (Attendance attendance : attendances) {
@@ -99,6 +94,14 @@ public class Crew {
             }
         }
         return false;
+    }
+
+    private int getTotalAbsence() {
+        int late = getAttendanceCountByType(AttendanceType.지각);
+        int absence = getAttendanceCountByType(AttendanceType.결석);
+        int addAbsenceFromLate = late / 3;
+
+        return absence + addAbsenceFromLate;
     }
 
     @Override

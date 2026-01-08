@@ -20,12 +20,12 @@ public class AttendanceController {
     private final AttendanceService attendanceService = new AttendanceService();
 
     public void main() {
-        while (true) {
-//            LocalDateTime today = LocalDateTime.of(2024, 12, 26, 13, 0);
-            LocalDateTime today = DateTimes.now();
+        //            LocalDateTime today = LocalDateTime.of(2024, 12, 26, 13, 0);
 
+        while (true) {
+            LocalDateTime today = DateTimes.now();
+            createCrews(today);
             try {
-                createCrews(today);
 
                 Function function = readFunction(today);
                 if (Function.종료 == function) {
@@ -38,10 +38,10 @@ public class AttendanceController {
                 if (Function.출석_수정 == function) {
                     editAttendance(today);
                 }
-                if(Function.크루별_출석_기록_확인 == function) {
+                if (Function.크루별_출석_기록_확인 == function) {
                     checkAttendanceHistory();
                 }
-                if(Function.제적_위험자_확인 ==function) {
+                if (Function.제적_위험자_확인 == function) {
                     checkRiskOfExpulsion();
                 }
 
