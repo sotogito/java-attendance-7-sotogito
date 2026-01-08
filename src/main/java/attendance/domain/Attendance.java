@@ -1,6 +1,7 @@
 package attendance.domain;
 
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -20,6 +21,22 @@ public class Attendance implements Comparable<Attendance> {
         this.dateTime = dateTime;
     }
 
+    private Attendance(LocalDateTime dateTime, AttendanceType attendanceType) {
+        this.dateTime = dateTime;
+        this.attendanceType = attendanceType;
+        dayOfWeekKorean = DayOfWeekKorean.find(dateTime.getDayOfWeek());
+    }
+
+    public static Attendance createAbsence(LocalDate localDate) {
+        return new Attendance(localDate.atStartOfDay(), AttendanceType.결석);
+    }
+
+
+    public boolean isSameDate(LocalDate date) {
+        LocalDate localDate = dateTime.toLocalDate();
+
+        return date.isEqual(localDate);
+    }
 
     @Override
     public int compareTo(Attendance o) {
@@ -33,6 +50,10 @@ public class Attendance implements Comparable<Attendance> {
         String dayOfWeek = dayOfWeekKorean.getKorean();
         String time = dateTime.format(DateTimeFormatter.ofPattern("HH:mm"));
         String attendanceState = String.format("(%s)", attendanceType.getKorean());
+
+        if (attendanceType == AttendanceType.결석) {
+            time = "--:--";
+        }
 
         sj.add(date)
                 .add(dayOfWeek)

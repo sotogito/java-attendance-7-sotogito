@@ -3,6 +3,8 @@ package attendance.util;
 import attendance.domain.Attendance;
 import attendance.domain.Crew;
 import attendance.domain.Crews;
+import camp.nextstep.edu.missionutils.DateTimes;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -10,6 +12,7 @@ import java.util.List;
 
 public class CrewsFactory {
 
+    /// 파일에 있는 날짜들만 출석 등록함
     public static Crews create(List<String> attendances) {
         List<Crew> crews = new ArrayList<>();
 
@@ -42,6 +45,12 @@ public class CrewsFactory {
             }
             crews.add(newCrew);
             newCrew.addAttendance(new Attendance(dateTime));
+        }
+
+        for (Crew crew : crews) {
+            crew.addAbsenceUntilToday(LocalDate.of(2024, 12, 1), DateTimes.now());
+//            crew.addAbsenceUntilToday(LocalDate.of(2024, 12, 1),
+//                    LocalDateTime.of(2024, 12, 26, 12, 12));
         }
         return new Crews(crews);
     }

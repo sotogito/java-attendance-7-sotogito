@@ -1,5 +1,9 @@
 package attendance.domain;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -16,6 +20,38 @@ public class Crew {
 
     public void addAttendance(Attendance attendance) {
         attendances.add(attendance);
+    }
+
+    public void addAbsenceUntilToday(LocalDate targetStartDate, LocalDateTime today) {
+        LocalDate targetDate = targetStartDate;
+
+        do {
+            DayOfWeek dayOfWeek = targetDate.getDayOfWeek();
+            DayOfWeekKorean dayOfWeekKorean = DayOfWeekKorean.find(dayOfWeek);
+            if (targetDate.getMonth() == Month.DECEMBER && targetDate.getDayOfMonth() == 25) {
+                targetDate = targetDate.plusDays(1);
+                continue;
+            }
+            if (dayOfWeekKorean.isWeekend()) {
+                targetDate = targetDate.plusDays(1);
+                continue;
+            }
+
+            boolean isContainAttendance = isContainAttendance(targetDate);
+            if (!isContainAttendance) {
+                attendances.add(Attendance.createAbsence(targetDate));
+            }
+            targetDate = targetDate.plusDays(1);
+        } while (targetDate.isBefore(today.toLocalDate()));
+    }
+
+    private boolean isContainAttendance(LocalDate targetDate) {
+        for (Attendance attendance : attendances) {
+            if (attendance.isSameDate(targetDate)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

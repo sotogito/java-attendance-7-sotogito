@@ -25,6 +25,10 @@ public enum DayOfWeekKorean {
         return korean + "요일";
     }
 
+    public boolean isWeekend() {
+        return isWeekend;
+    }
+
     public static boolean isWeekend(DayOfWeek other) {
         for (DayOfWeekKorean dayOfTheWeek : DayOfWeekKorean.values()) {
             if (dayOfTheWeek.dayOfWeek.equals(other)) {
