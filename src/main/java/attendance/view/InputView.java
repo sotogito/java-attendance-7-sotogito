@@ -21,6 +21,16 @@ public class InputView {
         return Reader.read().getInput();
     }
 
+    public static int readDay() {
+        System.out.println("수정하려는 날짜(일)를 입력해 주세요.");
+
+        try {
+            return Integer.parseInt(Reader.read().getInput());
+        }catch (NumberFormatException e) {
+            throw new IllegalArgumentException("잘못된 형식을 입력하였습니다.");
+        }
+    }
+
     public static String readNickName() {
         System.out.println("닉네임을 입력해 주세요.");
 

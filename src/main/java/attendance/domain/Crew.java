@@ -22,6 +22,19 @@ public class Crew {
         return nickname.equals(this.nickname);
     }
 
+    public Attendance findAttendance(LocalDate date) {
+        for (Attendance attendance : attendances) {
+            if (attendance.isSameDate(date)) {
+                return attendance;
+            }
+        }
+        throw new IllegalArgumentException("아직 수정할 수 없습니다.");
+    }
+
+    public void deleteAttendance(Attendance attendance) {
+        attendances.remove(attendance);
+    }
+
     public void addAttendance(Attendance attendance) {
         attendances.add(attendance);
     }

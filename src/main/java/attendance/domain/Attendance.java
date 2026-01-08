@@ -21,6 +21,18 @@ public class Attendance implements Comparable<Attendance> {
         this.dateTime = dateTime;
     }
 
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
+    public DayOfWeekKorean getDayOfWeekKorean() {
+        return dayOfWeekKorean;
+    }
+
+    public AttendanceType getAttendanceType() {
+        return attendanceType;
+    }
+
     private Attendance(LocalDateTime dateTime, AttendanceType attendanceType) {
         this.dateTime = dateTime;
         this.attendanceType = attendanceType;
