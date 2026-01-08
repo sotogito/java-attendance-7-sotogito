@@ -20,7 +20,7 @@ public class AttendanceController {
     private final AttendanceService attendanceService = new AttendanceService();
 
     public void main() {
-        //            LocalDateTime today = LocalDateTime.of(2024, 12, 26, 13, 0);
+//                    LocalDateTime today = LocalDateTime.of(2024, 12, 15, 13, 0);
 
         while (true) {
             LocalDateTime today = DateTimes.now();

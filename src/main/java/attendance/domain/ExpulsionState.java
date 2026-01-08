@@ -1,10 +1,14 @@
 package attendance.domain;
 
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+
 public enum ExpulsionState {
     경고("경고", 2),
     면담("면담", 3),
     제적("제적", 6),
-    해당안됨("해당안됨",0);
+    해당안됨("해당안됨", 0);
 
     private final String value;
     private final int minAbsence;
@@ -29,6 +33,14 @@ public enum ExpulsionState {
             return ExpulsionState.경고;
         }
         return ExpulsionState.해당안됨;
+    }
+
+    public static List<ExpulsionState> getSorted() {
+        return Arrays.stream(ExpulsionState.values())
+                .sorted(Comparator.comparingInt(
+                        (ExpulsionState s) -> s.minAbsence
+                ).reversed())
+                .toList();
     }
 
 }

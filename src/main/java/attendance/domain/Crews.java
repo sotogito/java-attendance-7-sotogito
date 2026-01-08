@@ -19,10 +19,14 @@ public enum Crews {
     public List<Crew> getRiskOfExpulsion() {
         List<Crew> riskOfExpulsionCrews = new ArrayList<>();
 
-        for (Crew crew : crews) {
-            ExpulsionState expulsionState = crew.getExpulsionState();
-            if (ExpulsionState.해당안됨 != expulsionState) {
-                riskOfExpulsionCrews.add(crew);
+        for (ExpulsionState expulsionState : ExpulsionState.getSorted()) {
+            if (ExpulsionState.해당안됨 == expulsionState) {
+                continue;
+            }
+            for (Crew crew : crews) {
+                if (expulsionState == crew.getExpulsionState()) {
+                    riskOfExpulsionCrews.add(crew);
+                }
             }
         }
         return riskOfExpulsionCrews;

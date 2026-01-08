@@ -28,7 +28,7 @@ public class OutputView {
 
     public static void writeRiskOfExpulsion(List<Crew> crews) {
         for (Crew crew : crews) {
-            int absence = crew.getAttendanceCountByType(AttendanceType.결석);
+            int absence = crew.getTotalAbsence();
             int late = crew.getAttendanceCountByType(AttendanceType.지각);
             ExpulsionState expulsionState = crew.getExpulsionState();
 
@@ -49,7 +49,7 @@ public class OutputView {
         System.out.println("\n");
         System.out.printf("출석: %d회\n", crew.getAttendanceCountByType(AttendanceType.출석));
         System.out.printf("지각: %d회\n", crew.getAttendanceCountByType(AttendanceType.지각));
-        System.out.printf("결석: %d회\n", crew.getAttendanceCountByType(AttendanceType.결석));
+        System.out.printf("결석: %d회\n", crew.getTotalAbsence());
         System.out.println();
         System.out.printf("%s 대상자입니다.\n", crew.getExpulsionState().getValue());
     }
