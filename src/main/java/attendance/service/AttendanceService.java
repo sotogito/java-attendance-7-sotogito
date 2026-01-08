@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
+import java.util.List;
 import java.util.Map;
 
 public class AttendanceService {
@@ -78,6 +79,10 @@ public class AttendanceService {
                 "old", oldAttendance,
                 "new", newAttendance
         );
+    }
+
+    public List<Crew> checkRiskOfExpulsion() {
+        return Crews.CREWS.getRiskOfExpulsion();
     }
 
 }

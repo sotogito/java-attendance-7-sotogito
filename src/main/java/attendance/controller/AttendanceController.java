@@ -38,6 +38,9 @@ public class AttendanceController {
                 if (Function.출석_수정 == function) {
                     editAttendance(today);
                 }
+                if(Function.제적_위험자_확인 ==function) {
+                    checkRiskOfExpulsion();
+                }
 
             } catch (IllegalArgumentException e) {
                 ExceptionHandler.read(e);
@@ -45,14 +48,13 @@ public class AttendanceController {
         }
     }
 
+    private void checkRiskOfExpulsion() {
+        List<Crew> crews = attendanceService.checkRiskOfExpulsion();
+
+        OutputView.writeRiskOfExpulsion(crews);
+    }
+
     private void editAttendance(LocalDateTime today) {
-        /**
-         * 이름
-         * 날짜
-         * 변경 시간
-         *
-         * 변경전 -> 변경 후
-         */
         Crew crew = attendanceService.findCrew(InputView.readNickName());
         int day = InputView.readDay();
         LocalTime time = InputView.readTime();

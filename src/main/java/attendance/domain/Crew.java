@@ -22,6 +22,36 @@ public class Crew {
         return nickname.equals(this.nickname);
     }
 
+    public String getNickname() {
+        return nickname;
+    }
+
+    public ExpulsionState getExpulsionState() {
+        int totalAbsence = getTotalAbsence();
+
+        return ExpulsionState.findByAbsenceCount(totalAbsence);
+    }
+
+    public int getTotalAbsence() {
+        int late = getAttendanceCountByType(AttendanceType.지각);
+        int absence = getAttendanceCountByType(AttendanceType.결석);
+        int addAbsenceFromLate = late / 3;
+
+        return absence + addAbsenceFromLate;
+    }
+
+    public int getAttendanceCountByType(AttendanceType type) {
+        int total = 0;
+
+        for (Attendance attendance : attendances) {
+            AttendanceType attendanceType = attendance.getAttendanceType();
+            if (attendanceType == type) {
+                total++;
+            }
+        }
+        return total;
+    }
+
     public Attendance findAttendance(LocalDate date) {
         for (Attendance attendance : attendances) {
             if (attendance.isSameDate(date)) {

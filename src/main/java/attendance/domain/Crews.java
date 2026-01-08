@@ -16,6 +16,19 @@ public enum Crews {
         return crews;
     }
 
+    public List<Crew> getRiskOfExpulsion() {
+        List<Crew> riskOfExpulsionCrews = new ArrayList<>();
+
+        for (Crew crew : crews) {
+            ExpulsionState expulsionState = crew.getExpulsionState();
+            if (ExpulsionState.해당안됨 != expulsionState) {
+                riskOfExpulsionCrews.add(crew);
+            }
+        }
+        return riskOfExpulsionCrews;
+    }
+
+
     public Crew findByNickname(String nickname) {
         for (Crew crew : crews) {
             if (crew.isSameNickname(nickname)) {
