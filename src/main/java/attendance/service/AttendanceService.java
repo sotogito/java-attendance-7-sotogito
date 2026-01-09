@@ -73,9 +73,10 @@ public class AttendanceService {
         Attendance newAttendance = new Attendance(newDate);
 
         crew.deleteAttendance(oldAttendance);
+
         crew.addAttendance(newAttendance);
 
-        return Map.of(
+        return Map.of( 
                 "old", oldAttendance,
                 "new", newAttendance
         );
