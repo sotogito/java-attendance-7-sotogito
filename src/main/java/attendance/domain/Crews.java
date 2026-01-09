@@ -3,6 +3,9 @@ package attendance.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Crews를 싱글톤으로 관리해서 테스트코드에 통과하지 못함
+ */
 public enum Crews {
     CREWS;
 
