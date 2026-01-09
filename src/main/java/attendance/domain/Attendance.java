@@ -63,7 +63,10 @@ public class Attendance implements Comparable<Attendance> {
         String time = dateTime.format(DateTimeFormatter.ofPattern("HH:mm"));
         String attendanceState = String.format("(%s)", attendanceType.getKorean());
 
-        if (attendanceType == AttendanceType.결석) {
+
+        if (attendanceType == AttendanceType.결석 &&
+                (dateTime.toLocalTime().equals(LocalTime.of(0,0)))
+        ) {
             time = "--:--";
         }
 
